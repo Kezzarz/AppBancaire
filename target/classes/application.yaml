@@ -1,9 +1,9 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/demo_db
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/banking_db
     username: postgres
     password: admin
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: create
