@@ -35,4 +35,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query(value = "select * from _user u inner join account a on u.id = a.id_user and a.iban = :iban", nativeQuery = true)
     List<User> searchByIbanNative(String iban);
+
 }
+
+
+
