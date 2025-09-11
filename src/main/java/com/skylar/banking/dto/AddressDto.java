@@ -2,14 +2,11 @@ package com.skylar.banking.dto;
 
 import com.skylar.banking.models.Address;
 import com.skylar.banking.models.User;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 
 public class AddressDto {
@@ -36,8 +33,8 @@ public class AddressDto {
                 .build();
     }
 
-    public static AddressDto toEntity(AddressDto address) {
-        return AddressDto.builder()
+    public static Address toEntity(AddressDto address) {
+        return Address.builder()
                 .id(address.getId())
                 .street(address.getStreet())
                 .houseNumber(address.getHouseNumber())

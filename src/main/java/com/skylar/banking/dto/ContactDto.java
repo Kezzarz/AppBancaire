@@ -2,14 +2,11 @@ package com.skylar.banking.dto;
 
 import com.skylar.banking.models.Contact;
 import com.skylar.banking.models.User;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class ContactDto {
 
@@ -24,8 +21,8 @@ public class ContactDto {
     public static ContactDto fromEntity(Contact contact) {
         return ContactDto.builder()
                 .id(contact.getId())
-                .firstname(contact.getFirstname())
-                .lastname(contact.getLastname())
+                .firstname(contact.getFirstName())
+                .lastname(contact.getLastName())
                 .email(contact.getEmail())
                 .iban(contact.getIban())
                 .userId(contact.getUser().getId())
@@ -35,8 +32,8 @@ public class ContactDto {
     public static Contact toEntity(ContactDto contact) {
         return Contact.builder()
                 .id(contact.getId())
-                .firstname(contact.getFirstname())
-                .lastname(contact.getLastname())
+                .firstName(contact.getFirstname())
+                .lastName(contact.getLastname())
                 .email(contact.getEmail())
                 .iban(contact.getIban())
                 .user(

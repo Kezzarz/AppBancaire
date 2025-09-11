@@ -2,16 +2,13 @@ package com.skylar.banking.dto;
 
 import com.skylar.banking.models.User;
 import jakarta.validation.constraints.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 
 public class UserDto {
