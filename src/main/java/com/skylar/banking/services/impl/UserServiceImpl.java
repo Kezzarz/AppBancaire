@@ -1,13 +1,15 @@
 package com.skylar.banking.services.impl;
 
+import com.skylar.banking.dto.AccountDto;
 import com.skylar.banking.dto.UserDto;
+import com.skylar.banking.models.Account;
 import com.skylar.banking.models.User;
 import com.skylar.banking.repositories.UserRepository;
+import com.skylar.banking.services.AccountService;
 import com.skylar.banking.services.UserService;
 import com.skylar.banking.validators.ObjectsValidator;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
+    private final AccountService accountService;
     private final ObjectsValidator<UserDto> validator;
 
     @Override
@@ -46,5 +49,30 @@ public class UserServiceImpl implements UserService {
     public void delete(Integer id) {
         // todo check before delete
         repository.deleteById(id);
+    }
+
+    @Override
+    public Integer validateAccount(Integer id) {
+        User user = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No user was found for user account validation"));
+
+        user.setActive(true);
+        // create a ban account
+        AccountDto account = AccountDto.builder()
+                .user(UserDto.fromEntity(user))
+                .build();
+        accountService.save(account);
+        repository.save(user);
+        return user.getId();
+    }
+
+    @Override
+    public Integer invalidateAccount(Integer id) {
+        User user = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No user was found for user account validation"));
+
+        user.setActive(false);
+        repository.save(user);
+        return user.getId();
     }
 }

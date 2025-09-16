@@ -23,10 +23,7 @@ public class TransactionDto {
     private Integer id;
 
     @Positive
-    @Max(value = 1000000)
-    @Min(value = 10)
     private BigDecimal amount;
-
 
     private TransactionType type;
     private String destinationIban;
