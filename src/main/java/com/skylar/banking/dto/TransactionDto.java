@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -27,7 +28,7 @@ public class TransactionDto {
 
     private TransactionType type;
     private String destinationIban;
-
+    private LocalDate transactionDate;
     private Integer userId;
 
     public static TransactionDto fromEntity(Transaction transaction) {

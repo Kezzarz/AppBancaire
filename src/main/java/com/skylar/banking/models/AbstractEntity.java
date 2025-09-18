@@ -28,7 +28,7 @@ public class AbstractEntity {
             nullable = false,
             updatable= false
     )
-    private LocalDateTime creationDate;
+    private LocalDateTime createdDate;
 
     @LastModifiedDate
     @Column(name = "lastModifiedDate")

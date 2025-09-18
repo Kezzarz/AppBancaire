@@ -1,5 +1,6 @@
 package com.skylar.banking.services.impl;
 
+import com.skylar.banking.dto.TransactionSumDetails;
 import com.skylar.banking.models.TransactionType;
 import com.skylar.banking.repositories.TransactionRepository;
 import com.skylar.banking.services.StatisticsService;
@@ -10,6 +11,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Map;
 
 
@@ -20,10 +22,10 @@ public class StatisticsServiceImpl implements StatisticsService {
     private final TransactionRepository transactionRepository;
 
     @Override
-    public Map<LocalDate, BigDecimal> findSumTransactionsByDate(LocalDate startDate, LocalDate endDate, Integer userId) {
+    public List<TransactionSumDetails> findSumTractionsByDate(LocalDate startDate, LocalDate endDate, Integer userId) {
         LocalDateTime start = LocalDateTime.of(startDate, LocalTime.of(0, 0, 0));
-        LocalDateTime end = LocalDateTime.of(startDate, LocalTime.of(23, 59, 59));
-        return transactionRepository.findSumTransactionsByDate(startDate, endDate, userId);
+        LocalDateTime end = LocalDateTime.of(endDate, LocalTime.of(23, 59, 59));
+        return transactionRepository.findSumTransactionsByDate(start, end, userId);
     }
 
     @Override

@@ -35,7 +35,7 @@ public class TransactionController {
         return ResponseEntity.ok(service.findById(transactionId));
     }
 
-    @GetMapping("/users/{/user-id}")
+    @GetMapping("/users/{user-id}")
     public ResponseEntity<List<TransactionDto>> findAllByUserId(
             @PathVariable("user-id") Integer userId
     ) {

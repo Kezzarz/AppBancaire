@@ -1,12 +1,15 @@
 package com.skylar.banking.controllers;
 
+import com.skylar.banking.dto.TransactionSumDetails;
 import com.skylar.banking.services.StatisticsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -17,12 +20,12 @@ public class StatisticsController {
     private final StatisticsService service;
 
     @GetMapping("/sum-by-date/{user-id}")
-    public ResponseEntity<Map<LocalDate, BigDecimal>> findSumTransactionsByDate(
+    public ResponseEntity<List<TransactionSumDetails>> findSumTractionsByDate(
             @PathVariable("user-id") Integer userId,
-            @RequestParam ("start-date") LocalDate startDate,
-            @RequestParam ("end-date") LocalDate endDate
+            @RequestParam ("start-date") @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate startDate,
+            @RequestParam ("end-date") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate
     ){
-        return ResponseEntity.ok(service.findSumTransactionsByDate(startDate, endDate, userId));
+        return ResponseEntity.ok(service.findSumTractionsByDate(startDate, endDate, userId));
     }
 
     @GetMapping("/account-balance/{user-id}")
