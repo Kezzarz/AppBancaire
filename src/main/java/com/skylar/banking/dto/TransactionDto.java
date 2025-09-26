@@ -36,6 +36,7 @@ public class TransactionDto {
                 .id(transaction.getId())
                 .amount(transaction.getAmount())
                 .type(transaction.getType())
+                .transactionDate(transaction.getTransactionDate())
                 .destinationIban(transaction.getDestinationIban())
                 .userId(transaction.getUser().getId())
                 .build();
@@ -46,6 +47,7 @@ public class TransactionDto {
                 .id(transaction.getId())
                 .amount(transaction.getAmount())
                 .type(transaction.getType())
+                .transactionDate(LocalDate.now())
                 .destinationIban(transaction.getDestinationIban())
                 .user(
                         User.builder()
