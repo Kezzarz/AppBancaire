@@ -3,6 +3,7 @@ package com.skylar.banking.handlers;
 import com.skylar.banking.exceptions.ObjectValidationException;
 import com.skylar.banking.exceptions.OperationNonPermittedException;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -36,10 +37,20 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(OperationNonPermittedException.class)
     public ResponseEntity<ExceptionRepresentation> handleException(OperationNonPermittedException exception) {
         ExceptionRepresentation representation = ExceptionRepresentation.builder()
-                .errorMessage(exception.getMessage())
+                .errorMessage(exception.getErrorMsg())
                 .build();
         return ResponseEntity
                 .status(HttpStatus.NOT_ACCEPTABLE)
+                .body(representation);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<ExceptionRepresentation> handleException() {
+        ExceptionRepresentation representation = ExceptionRepresentation.builder()
+                .errorMessage("Un utilisateur à déja été crée avec cette Email.")
+                .build();
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
                 .body(representation);
     }
 

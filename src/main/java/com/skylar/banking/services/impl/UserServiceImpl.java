@@ -9,6 +9,7 @@ import com.skylar.banking.services.AccountService;
 import com.skylar.banking.services.UserService;
 import com.skylar.banking.validators.ObjectsValidator;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -52,16 +53,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional // Permet un retour en arriere en cas d'erreur de cette méthode de validation.
     public Integer validateAccount(Integer id) {
         User user = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("No user was found for user account validation"));
 
-        user.setActive(true);
         // create a ban account
         AccountDto account = AccountDto.builder()
                 .user(UserDto.fromEntity(user))
                 .build();
         accountService.save(account);
+
+        user.setActive(true);
         repository.save(user);
         return user.getId();
     }

@@ -20,7 +20,7 @@ public class AbstractEntity {
 
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
 
     @CreatedDate
     @Column(

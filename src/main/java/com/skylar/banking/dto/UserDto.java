@@ -25,16 +25,16 @@ public class UserDto {
     @NotBlank(message = "Le nom ne doit pas être vide.")
     private String lastname;
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
-    @Email
+    @NotNull(message = "L'email ne doit pas être vide.")
+    @NotEmpty(message = "L'email ne doit pas être vide.")
+    @NotBlank(message = "L'email ne doit pas être vide.")
+    @Email(message = "L'email n'est pas conforme")
     private String email;
 
-    @NotNull
-    @NotEmpty
-    @NotBlank
-    @Size(min = 8, max = 16)
+    @NotNull(message = "Le mot de passe ne doit pas être vide.")
+    @NotEmpty(message = "Le mot de passe ne doit pas être vide.")
+    @NotBlank(message = "Le mot de passe ne doit pas être vide.")
+    @Size(min = 8, max = 16, message = "Le mot de passe doit etre entre 8 et 16 caracteres")
     private String password;
 
     @Past
